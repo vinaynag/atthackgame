@@ -1,0 +1,4 @@
+create table users(user_id varchar(100), opp_id varchar(100));
+create table events(event_id int not null auto_increment primary key, user_id varchar(100), evt blob);
+create table requests(user_id varchar(100));
+

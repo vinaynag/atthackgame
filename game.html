@@ -1,0 +1,89 @@
+<meta name="viewport" 
+  content="width=device-width, initial-scale=1.0, user-scalable=no">
+<html>
+<head>
+<style>
+body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    margin: 0px 0px 0px 0px;
+    color: lime;
+}
+</style>
+<script src='expression.js'></script>
+<script src='boolean_logic.js'></script>
+<script src='sample.js'></script>
+<script src='twolists.js'></script>
+<script src='common.js'></script>
+<script src='particles.js'></script>
+<script src='ajax.js'></script>
+</head>
+<body>
+
+<div id='myDivIdOuter' style='border:1px solid lime;position:absolute;left:5px;top:5px;width:400px;height:500px;display:none;'>
+<div id='myDivId' style='position:absolute;left:0px;top:0px;width:400px;height:500px;'>
+</div>
+<div id='myDivLive' style='position:relative;left:10px;top:460px;width:380px;height:30px; background-color:green;text-align:center;color:#ffffff'>100</div>
+</div>
+<div id='oppDivIdOuter' style='border:1px solid lime;position:absolute;left:410px;top:5px;width:400px;height:500px;display:none;'>
+<div id='oppDivId' style='position:absolute;left:0px;top:0px;width:400px;height:500px;'>
+</div>
+<div id='oppDivLive' style='position:relative;left:10px;top:460px;width:380px;height:30px; background-color:green;text-align:center;color:#ffffff'>100</div>
+</div>
+<div id='waiting' style='border:1px solid lime;position:absolute;left:310px;top:305px;width:200px;height:150px;'>
+<br>
+<div id='ggMessage' style='color: yellow;'></div>
+<br>
+<center>Looking for opponent...</center>
+</div>
+
+<script>
+myDiv = document.getElementById('myDivId');
+oppDiv = document.getElementById('oppDivId');
+
+requestFight();
+
+document.body.addEventListener('touchmove', function(event) {
+          event.preventDefault();
+          }, false); 
+
+
+
+function touchHandler(event)
+{
+    var touches = event.changedTouches,
+        first = touches[0],
+        type = "";
+
+         switch(event.type)
+    {
+        case "touchstart": type = "mousedown"; break;
+        case "touchmove":  type="mousemove"; break;        
+        case "touchend":   type="mouseup"; break;
+        default: return;
+    }
+
+             //initMouseEvent(type, canBubble, cancelable, view, clickCount,
+    //           screenX, screenY, clientX, clientY, ctrlKey,
+    //           altKey, shiftKey, metaKey, button, relatedTarget);
+    
+    var simulatedEvent = document.createEvent("MouseEvent");
+    simulatedEvent.initMouseEvent(type, true, true, window, 1,
+                              first.screenX, first.screenY,
+                              first.clientX, first.clientY, false,
+                              false, false, false, 0/*left*/, null);
+
+    first.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+}
+document.addEventListener("touchstart", touchHandler, true);
+document.addEventListener("touchmove", touchHandler, true);
+document.addEventListener("touchend", touchHandler, true);
+document.addEventListener("touchcancel", touchHandler, true);  
+
+</script>
+
+</body>
+</html>
+
